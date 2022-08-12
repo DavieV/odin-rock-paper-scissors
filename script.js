@@ -15,16 +15,11 @@ function playRound(playerChoice, computerChoice) {
     return 0;
   }
 
-  let win = (playerChoice == "rock" && computerChoice == "scissors") ||
-            (playerChoice == "paper" && computerChoice == "rock") ||
-            (playerChoice == "scissors" && computerChoice == "paper");
-  if (win) {
-    return 1
-  }
-  return -1;
-
-  return win ? `You win! ${playerChoice} beats ${computerChoice}`
-             : `You lose! ${computerChoice} beats ${playerChoice}`;
+  return ((playerChoice == "rock" && computerChoice == "scissors") ||
+          (playerChoice == "paper" && computerChoice == "rock") ||
+          (playerChoice == "scissors" && computerChoice == "paper"))
+             ? 1  // win
+             : -1 // loss
 }
 
 function validChoice(choice) {
@@ -35,11 +30,14 @@ function validChoice(choice) {
 function game() {
   let wins = 0;
   let losses = 0;
+
   for (let i = 0; i < 5; ++i) {
     let playerChoice = prompt("Choose your fighter!");
+
     while (!validChoice(playerChoice)) {
       playerChoice = prompt("Choose from one of: rock, paper, scissors");
     }
+
     let computerChoice = getComputerChoice();
     let result = playRound(playerChoice, computerChoice);
 
